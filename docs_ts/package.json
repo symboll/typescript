@@ -1,0 +1,26 @@
+{
+  "name": "docs_ts",
+  "version": "1.0.0",
+  "description": "typescript",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "symbollee",
+  "license": "MIT",
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.4.1",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "ts-loader": "^8.0.3"
+  }
+}
