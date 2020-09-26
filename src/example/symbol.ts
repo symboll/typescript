@@ -36,7 +36,7 @@ let s8 = Symbol.for("zhangsan")
 class A {
   public static [Symbol.hasInstance](value: any) {
     console.log("==>", value)
-    return value instanceof A;
+    return false;
   }
   constructor(private name: string) {}
   public [s6]() {
@@ -52,5 +52,6 @@ const ab = new A("nativeLee")
 // console.log(ab.getName())     // ok
 
 // console.log(ab instanceof A)
+console.log(ab instanceof A)
 // 11个内置symbol值
 // Symbol.hasInstance
