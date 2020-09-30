@@ -20,12 +20,11 @@ const info = {
   name: "zhangsan",
   [s6]: 18,
 }
-
+console.log(info[s6])
 // console.log(Object.keys(info))                    // ["name"]
 // console.log(Object.getOwnPropertyNames(info))     // ["name"]
 // console.log(Object.getOwnPropertySymbols(info))   // [Symbol()]
 // console.log(Reflect.ownKeys(info))                 // ["name", Symbol()]
-console.log(info[s6])
 
 // symbol 的2个静态方法
 let s7 = Symbol.for("zhangsan")
@@ -50,8 +49,6 @@ class A {
 const ab = new A("nativeLee")
 // console.log(ab[s6]())
 // console.log(ab.getName())     // ok
-
-// console.log(ab instanceof A)
 console.log(ab instanceof A)
 // 11个内置symbol值
 // Symbol.hasInstance
