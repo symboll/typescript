@@ -2,7 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    main: './src/index.ts',
+    js: './src/index.js'
+  },
   output: {
     filename: "[name].js"
   },
@@ -15,6 +18,14 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+          plugins: ['@babel/plugin-proposal-class-properties']
+        }
       }
     ]
   },
