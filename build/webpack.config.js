@@ -40,7 +40,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/template/index.html'
+      template: './src/template/index.html',
+      chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/template/js.html',
+      filename: 'js.html',
+      title: 'javascript',
+      chunks: ['js']
     })
   ]  
 }

@@ -121,9 +121,7 @@ interface Counter {
 }
 
 const getCounter = (): Counter => {
-  const c = ()=>  {c.count ++ }
+  const c = () =>  {c.count ++ }
   c.count = 0
   return c
 }
-
-

@@ -1,1 +1,1 @@
-import './js_example/class'
+import './js_example/class.js'
