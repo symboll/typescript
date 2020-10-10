@@ -13,7 +13,10 @@
       "object-literal-sort-keys": [false],
       "quotemark": [false],
       "max-classes-per-file": [false, 1],
-      "no-empty-interface": [false]
+      "no-empty-interface": [false],
+      "interface-over-type-literal": [false],
+      "trailing-comma": [false],
+      "variable-name": [false]
     },
     "rulesDirectory": []
 }

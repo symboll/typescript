@@ -3,4 +3,5 @@
 // import "./example/interface"
 // import './example/function'
 // import './example/generics'
-import './example/class.ts'
+// import './example/class.ts'
+import './example/advanced'
