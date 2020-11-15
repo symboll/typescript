@@ -4,4 +4,5 @@
 // import './example/function'
 // import './example/generics'
 // import './example/class.ts'
-import './example/advanced'
+// import './example/advanced'
+import './example/advanced2'

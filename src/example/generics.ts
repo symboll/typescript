@@ -40,9 +40,7 @@ interface GetArray3 <T> {
 /**
  * 泛型约束
  */
-interface ValueWithLength{
-  length: number
-}
+interface ValueWithLength { length: number }
 
 const getArray4 = <T extends ValueWithLength>(arg: T, times = 5): T[] => {
   return new Array(times).fill(arg)
