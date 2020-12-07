@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+gconst path = require('path')
 module.exports = {
   entry: {
     main: './src/index.ts',
     js: './src/index.js'
   },
   output: {
-    filename: "[name].js"
+    filename: "[name].js",
+    path: path.resolve(__dirname, '../dist')
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
