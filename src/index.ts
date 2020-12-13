@@ -5,4 +5,5 @@
 // import './example/generics'
 // import './example/class.ts'
 // import './example/advanced'
-import './example/advanced2'
+// import './example/advanced2'
+import './example/decorators'

@@ -1,35 +1,31 @@
-
-function setProps (target) {
-  console.log('target')
+function setProps(target) {
+  console.log("target")
 }
 function decortorsFactory1(value: string) {
-  console.log('a')
+  console.log("a")
   return (target) => {
-    console.log('1', value)
+    console.log("1", value)
   }
 }
 function decortorsFactory2(value: string) {
-  console.log('b')
+  console.log("b")
   return (target) => {
-    console.log('2', value)
+    console.log("2", value)
   }
 }
 function decortorsFactory3(value: string) {
-  console.log('b')
+  console.log("b")
   return (target) => {
-    console.log('3', value)
+    console.log("3", value)
   }
 }
 
-
 @setProps
-@decortorsFactory1('zhangsan')
-@decortorsFactory2('zhangsan')
-@decortorsFactory3('zhangsan')
+@decortorsFactory1("zhangsan")
+@decortorsFactory2("zhangsan")
+@decortorsFactory3("zhangsan")
 class Parentw {
-  constructor(public name: string) {
-
-  }
+  constructor(public name: string) {}
 }
 
 // 装饰器求值
@@ -39,9 +35,9 @@ class Parentw {
 // 参数装饰器，然后依次是方法装饰器，访问符装饰器，或属性装饰器应用到每个静态成员。
 // 参数装饰器应用到构造函数。
 // 类装饰器应用到类。
-console.log('--------------类装饰器--------------')
-function addName (constructor: new() => any) {
-  constructor.prototype.name = 'symboll'
+console.log("--------------类装饰器--------------")
+function addName(constructor: new () => any) {
+  constructor.prototype.name = "symboll"
 }
 @addName
 class D {}
@@ -52,14 +48,16 @@ interface D {
 const d = new D()
 console.log(d.name)
 
-console.log('--------------方法装饰器--------------')
+console.log("--------------方法装饰器--------------")
+// target 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
 function enumerables(bool: boolean) {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-    console.log(
+    console
+      .log
       // target,
       // propertyKey,
       // descriptor
-    )
+      ()
     descriptor.enumerable = bool
   }
 }
@@ -76,12 +74,11 @@ class Greeter {
 const greeter = new Greeter(12)
 
 for (const key in greeter) {
-  console.log('key=>', key)
+  console.log("key=>", key)
 }
 
-
-console.log('--------------访问符饰器--------------')
-
+console.log("--------------访问符饰器--------------")
+// target 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
 class Greeter2 {
   private _name: string
   constructor(name: string) {
@@ -97,24 +94,41 @@ class Greeter2 {
   }
 }
 
-const greeter2 = new Greeter2('zhangsan')
+const greeter2 = new Greeter2("zhangsan")
 for (const key in greeter2) {
-  console.log('key==>', key)
+  console.log("key==>", key)
 }
 
-console.log('--------------参数饰器--------------')
-
+console.log("--------------属性饰器--------------")
+// target 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
 function printPropertyKey(target: any, propertyKey: string) {
   console.log(propertyKey)
 }
 class Greeter3 {
-
   @printPropertyKey
-  public greeting: string;
+  public greeting: string
 
   constructor(message: string) {
-      this.greeting = message;
+    this.greeting = message
   }
-  public greet() {
+  public greet() {}
+}
+
+console.log("--------------参数饰器--------------")
+// target 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+// 参数装饰器的返回值会被忽略
+function required(target: any, propertyKey: string, index: number) {
+  console.log(propertyKey, index)
+}
+
+class Greeter4 {
+  public name: string = "symboll"
+  public age: number = 18
+
+  public getInfo(prefix: string, @required infoType: string): any {
+    return prefix + " " + this[infoType]
   }
 }
+
+const greeter4 = new Greeter4()
+greeter4.getInfo("prefix-", "age")

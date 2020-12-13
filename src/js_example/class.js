@@ -246,3 +246,11 @@ console.log(Child.getParentType())
 
 // es5 先创建子构造函数的 实例 this， 再将父构造方法的 方法，属性，添加到 this上
 // es6 先从父类取到 实例 this，再调用super函数之后。将子类的属性 方法 添加到this上。 
+
+function PrintName (target) {
+  console.log(target.name)
+}
+@PrintName
+class Greeter {
+  constructor() {}
+}
