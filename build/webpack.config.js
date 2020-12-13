@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-gconst path = require('path')
+const path = require('path')
 module.exports = {
   entry: {
     main: './src/index.ts',
@@ -25,7 +25,10 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          plugins: ['@babel/plugin-proposal-class-properties']
+          plugins: [
+            [ "@babel/plugin-proposal-decorators",{"legacy": true}],
+            '@babel/plugin-proposal-class-properties',
+          ]
         }
       }
     ]
