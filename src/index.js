@@ -1,1 +1,0 @@
-import './js_example/class.js'

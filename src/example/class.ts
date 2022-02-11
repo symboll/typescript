@@ -9,7 +9,7 @@ class Point {
     return `( ${this.x}, ${this.y} )`
   }
 }
-const p = new Point(12, 34)
+const p = new Point(1, 2)
 // console.log(p)
 
 /**
@@ -78,14 +78,10 @@ const person2 = new Child('zhangsan', 19, true, 'sdada@163.com', 'hangzhou', 150
  * protected 修饰 constructor
  * private   修饰 constructor
  */
-
 class Bird {
   // private constructor() {}
   protected constructor() {}
 }
-
-// const t = new T()
-
 class Sparrow extends Bird {     // 麻雀
   constructor() {
     super()
@@ -96,20 +92,20 @@ const sparrow = new Sparrow()
 /**
  * readonly
  */
-
-class Test {
+class ReadonlyClass {
   public readonly name: string
   constructor(name: string) {
     this.name = name
   }
 }
 
-const test = new Test('zhangsan')
-// test.name = 'lisi'
-Object.defineProperty(test, 'name', {
-  value: 'zhangsan',
+const readonlyObj = new ReadonlyClass('zhangsan')
+// readonlyObj.name = 'lisi'      // error
+Object.defineProperty(readonlyObj, 'name', {
+  value: 'wangwu',
 })
-// console.log(test instanceof Test)
+console.log('readonlyObj=>', readonlyObj, readonlyObj.name)
+// console.log(readonlyObj instanceof ReadonlyClass)
 
 /**
  * 参数属性 public protected private readonly
@@ -130,9 +126,8 @@ class StaticParams {
     return StaticParams.type
   }
 }
-
-const sp = new StaticParams()
-// console.log(StaticParams.type)
+// const sp = new StaticParams()
+console.log(StaticParams.type)
 // console.log(StaticParams.getType())   // Error
 
 /**
@@ -150,9 +145,9 @@ class Infos {
 const infos1 = new Infos('zhangsan')
 const infos2 = new Infos('lisi', 18)
 const infos3 = new Infos('wangwu', 18, 'male')
-// console.log(infos1)
-// console.log(infos2)
-// console.log(infos3)
+console.log('infos1', infos1)
+console.log('infos2', infos2)
+console.log('infos3', infos3)
 
 /**
  * 抽象类
@@ -244,7 +239,7 @@ interface Ia extends Aa {}
 
 class Bb extends Aa implements Ia {
   // public name: string  // OK
-  protected name: string
+  protected name: string = ''
 }
 
 class Cc {

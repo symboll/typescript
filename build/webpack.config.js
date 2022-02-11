@@ -2,9 +2,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 module.exports = {
+  target: 'web',
   entry: {
-    main: './src/index.ts',
-    js: './src/index.js'
+    index: './src/index.ts',
+    ts: './src/example/index.ts',
+    js: './src/js_example/index.js'
   },
   output: {
     filename: "[name].js",
@@ -33,25 +35,26 @@ module.exports = {
       }
     ]
   },
-  devtool: process.env.NODE_ENV === 'development'? 'inline-source-map': false,
-  devServer: {
-    contentBase: './dist',
-    stats: 'errors-only',
-    compress: false,
-    host: 'localhost',
-    port: 8089
-  },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/template/index.html',
-      chunks: ['main']
+      template: './src/index.html',
+      filename: "index.html",
+      chunks: ['index'],
+      favicon: './public/favicon.ico'
     }),
     new HtmlWebpackPlugin({
-      template: './src/template/js.html',
+      template: './src/example/index.html',
+      filename: 'ts.html',
+      chunks: ['ts'],
+      favicon: './public/favicon.ico'
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/js_example/index.html',
       filename: 'js.html',
-      title: 'javascript',
-      chunks: ['js']
-    })
+      chunks: ['js'],
+      favicon: './public/favicon.ico'
+    }),
+    new CleanWebpackPlugin()
   ]  
 }
+

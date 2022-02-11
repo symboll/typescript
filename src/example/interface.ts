@@ -1,14 +1,21 @@
+/**
+ * 接口基本用法
+ */
 interface NameInfo {
-  firstname: string,
-  lastname: string
+  firstName: string,
+  lastName: string
 }
 
-const getFullName = ({firstname, lastname}: NameInfo): string => {
-  return `${firstname} ${lastname}`
+const getFullName = ({firstName, lastName}: NameInfo): string => {
+  return `${firstName} ${lastName}`
 }
 
 /**
  * 可选属性
+ *
+ * 只读属性
+ * 
+ * 索引签名 【绕过多余属性检查， 其他2种方式：类型断言， 类型兼容性】
  */
 interface Vegetable {
   color ?: string,
@@ -16,28 +23,28 @@ interface Vegetable {
   [prop: string]: any
 }
 
-const getVegtables = ({ color, type}: Vegetable): string => {
+const getVegetables = ({ color, type}: Vegetable): string => {
   return `a ${color ? color : ""} ${type}`
 }
 
-console.log(getVegtables({
+console.log(getVegetables({
   // color: "red",
-  type: "tomoto",
+  type: "tomato",
 }))
 
 /**
  * 多余属性检查
  */
-// getVegtables({
+// getVegetables({
 //   color: "red",
-//   type: "tomoto",
+//   type: "tomato",
 //   size: 12,
 // })
 
 // 1. 使用类型断言
-getVegtables({
-  // color: "red",
-  type: "tomoto",
+getVegetables({
+  color: "red",
+  type: "tomato",
   size: 12,
 } as Vegetable)
 
@@ -47,8 +54,8 @@ getVegtables({
 // }
 
 // 3.类型兼容性
-const a =  { color: "red", type: "tomoto", size: 12 }
-getVegtables(a)
+const compatible =  { color: "red", type: "tomato", size: 12 }
+getVegetables(compatible)
 
 /**
  * 只读属性
@@ -70,12 +77,17 @@ interface ArrayInter {
 const arr: ArrayInter = [2, 's']
 // arr[1] = 'read'
 
+
 /**
- * 函数结构
+ * 接口除了可以定义对象的结构，
+ * 还可以定义 【函数结构】
  */
 interface AddFuncInter {
   (num1: number, num2: number): number
 }
+
+// Interface has only a call signature — use
+// `type AddFuncInter = (num1: number, num2: number) => number` instead. (callable-types)tslint(1) 
 // 类型别名
 // type AddFuncInter = (num1: number, num2: number) => number
 

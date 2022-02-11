@@ -1,55 +1,56 @@
-// boolean
+/// boolean
 let bool: boolean = false
 bool = true
 // bool = 'abc'
 
-// number
+/// number
 let num: number = 123
 // num = 'abc'
 num = 0b1111011
 num = 0o173
 num = 0x7b
 
+/// bigint
 let bigint: bigint = 12n
-console.log(bigint)
 
-// string
+/// string
 let str: string = "abc"
 str = `数值是${num}`
 
-// Array
+/// Array
 let arr1: number[] = [1, 2, 3]
 let arr2: string[] = ["a", "b"]
 let arr3: Array<number| string> = [1, 2, 3, "a"]   // 联合类型
-let arr4: Array<number| string> = [1, 2, 3, "a"]
+// Array type using 'T[]' is forbidden for non-simple types. Use 'Array<T>' instead. (array-type)
+// let arr4: (number| string)[] = [1, 2, 3, "a"]
 
-// tuple
+/// tuple
 let tuple: [number, string] = [ 1, "s"]
 
-// enum
+/// enum
 enum Roles {
   USER,
   ADMIN = 4,
-  SUPET_ADMIN,
+  SUPER_ADMIN,
 }
 console.log(Roles[4])
 
-// any
+/// any
 let value: any = 123
 value = "abc"
 value = false
 let arr5: any[] = [1, 2, "a", false]
 
-// void
+/// void
 let res = (function(arg: string): void {})("")
-res = undefined
+// res = undefined
 // res = null
 
-// undefined & null
+/// undefined & null
 let u: undefined
 let n: null = null
 
-// never
+/// never
 // 1. 抛错
 // 2. 死循环
 let errorfunc = function() {
@@ -62,12 +63,12 @@ let infinitefunc = function() {
 // u = a
 // n = a
 
-// Object
+/// Object
 let obj = { name: "symbollee" }
 function printObj(ob: object): void {
   console.log(ob)
 }
-printObj(obj)
+// printObj(obj)
 // printObj(new Date())
 // printObj([1,2,3])
 

@@ -7,7 +7,7 @@
 //   return "x: "+ this.x + "y: "+ this. y
 // }
 
-// const p = new Point(10,20)
+// const p = new Point(1,2)
 // console.log(p)
 // console.log(p.getPosition())
 
@@ -22,35 +22,35 @@ class Point {
   }
 }
 
-const p = new Point(12,34)
-// console.log(p.getPosition())
-// console.log(p.hasOwnProperty('x'))
-// console.log(p.hasOwnProperty('getPosition'))
-// console.log('getPosition=>', Object.getPrototypeOf(p).hasOwnProperty('getPosition'))
-// console.log(Reflect.ownKeys(p))
+const p = new Point(1,2)
+console.log(p.getPosition())
+console.log(p.hasOwnProperty('x'))
+console.log(p.hasOwnProperty('getPosition'))
+console.log('getPosition=>', Object.getPrototypeOf(p).hasOwnProperty('getPosition'))
+console.log(Reflect.ownKeys(p))
 
-class Info {
-  constructor(age) {
-    this._age = age
+class Line {
+  constructor(point) {
+    this._point = point
   }
-  set age (value) {
-    console.log('age is ==>',value)
-    this._age = value
+  set point (value) {
+    console.log('point is ==>',value)
+    this._point = value
   }
-  get age () {
-    return this._age
+  get point () {
+    return this._point
   }
 }
 
-// const info = new Info(19)
-// console.log(info)
-// info.age = 20
+// const line = new Line(19)
+// console.log(line)
+// line.point = 20
 
-const C = class {
+const Triangle = class {
   constructor() {}
 }
 
-const c = new C()
+const triangle = new Triangle()
 
 /** 
  * 静态方法 
@@ -77,9 +77,8 @@ const c = new C()
  * 实例属性其他写法
  * 需要扩展 babel-loader
  */
-
 class Circle {
-  // z = 0
+  z = 0
   constructor(x, y) {
     this.x = x
     this.y = y
@@ -87,26 +86,23 @@ class Circle {
 }
 
 const circle = new Circle(10,20)
-// console.log('circle',circle)
+console.log('circle->',circle)
 
 /**
  *  es6只有静态方法， 没有静态属性
  *  但是 可以用其他方式 实现
  */
-
-
-class A {
+class Rectangle {
   static z = 19
   constructor(x) {
     this.x = x
   }
 }
-A.y = 12
+Rectangle.y = 12
 
-const a = new A(11)
-// console.log(a)
-// console.log(A.y)
-// console.log(A.z)     // 提案中
+const rectangle = new Rectangle(11)
+console.log('static props->', Rectangle.y)
+console.log('static props->', Rectangle.z)     // 提案中
 
 /** 
  * 私有方法
@@ -114,7 +110,7 @@ const a = new A(11)
  */
  
 const s = Symbol.for('s')
-class B {
+class Pentagon {
   #z
   constructor(z) {
     this.#z = z
@@ -122,57 +118,58 @@ class B {
   [s] () {
     return 'I am a symbol'
   }
-  getZvalue () {
+  getZValue () {
     return this.#z
   }
 }
 
-const b = new B(123)
-// console.log(b)
-// console.log(b.z)
-// console.log('==>',b.getZvalue())
-// console.log('==>',b[s]())
+const pentagon = new Pentagon(123)
+console.log('pentagon=>',pentagon)
+console.log(pentagon.z)
+console.log('==>',pentagon.getZValue())
+console.log('==>',pentagon[s]())
  
 /** 
  * new.target 
  */
+class Polygon {
+  constructor() {
+    console.log('new.target=>',new.target)
+    console.log('new.target boolean=>',new.target === Polygon)
+    if(new.target === Polygon) {
+      // throw new Error('不能实例化')
+    }
+  }
+}
 
-// class Parent {
-//   constructor() {
-//     if(new.target === Parent) {
-//       throw new Error('不能实例化')
-//     }
-//   }
-// }
-
-// class Child extends Parent {
-//   constructor() {
-//     super()
-//   }
-// }
-// // const p1 = new Parent()   // Error
-// const c1 = new Child()
+class Hexagon extends Polygon {
+  constructor() {
+    super()
+  }
+}
+const p1 = new Polygon()   // Error
+const h1 = new Hexagon()
 
 /**
  * es5 的继承
  */
-
-function Food () {
-  this.type = 'food'
+function Food (type) {
+  this.type = type
 }
 Food.prototype.getType = function () {
   return this.type
 }
 
-function Vegeables (name) {
-  Food.call(this)
+function Vegetables (type, name) { 
+  Food.call(this, type)
   this.name = name
 }
 
-Vegeables.prototype = Object.create(Food.prototype)
-Vegeables.prototype.constructor = Vegeables
+Vegetables.prototype = Object.create(Food.prototype)
+Vegetables.prototype.constructor = Vegetables
 
-const v = new Vegeables('tomato')
+const v = new Vegetables('vegetable  ','tomato')
+console.log('v=>>', v)
 // console.log(v.getType())
 
 /**
@@ -238,15 +235,17 @@ class Child extends Parent {
 }
 
 const child = new Child('zhangsan', 18)
-console.log(child.getParentName())
-// name: undefined, type: undefined, getName: zhangsan
-console.log(Child.getParentType())
-// name: Parent, type: this is Parent Type, getName: undefined
+console.log(child.getParentName())  // name: undefined, type: undefined, getName: zhangsan
+console.log(Child.getParentType())  // name: Parent, type: this is Parent Type, getName: undefined
 
 
 // es5 先创建子构造函数的 实例 this， 再将父构造方法的 方法，属性，添加到 this上
 // es6 先从父类取到 实例 this，再调用super函数之后。将子类的属性 方法 添加到this上。 
 
+
+/**
+ * decorators
+ */
 function PrintName (target) {
   console.log(target.name)
 }

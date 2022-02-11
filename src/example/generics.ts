@@ -6,16 +6,18 @@ const getArray  = <T> (value: T, times = 5): T[] => {
   return new Array(times).fill(value)
 }
 
-getArray<number>(10, 3).map((item) => item.toFixed())
+console.log('->', getArray<number>(10, 3))
+console.log('=>', getArray<number>(10, 3).map((item) => item.toFixed(2)))
 
 const getArray2 = <T, U>(param1: T , parma2: U, times: number = 5): Array<[T, U]> => {
   return new Array(times).fill([param1, parma2])
 }
 
-getArray2(13, 'ab').forEach((item) => {
-  console.log(item[0].toFixed())
-  console.log(item[1].length)
-})
+// getArray2(13, 'ab').forEach((item) => {
+//   console.log(item[0].toFixed())
+//   console.log(item[1].length)
+// })
+console.log('--->', getArray2(13, 'ab'))
 
 /**
  * 泛型在类型定义中的使用
